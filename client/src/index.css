@@ -1,0 +1,121 @@
+/* ═══════════════════════════════════════════
+   Inter Font Import — MUST be at the very top
+   ═══════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ═══════════════════════════════════════════
+   Tailwind Imports
+   ═══════════════════════════════════════════ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════
+   Custom Utility Classes
+   ═══════════════════════════════════════════ */
+@layer utilities {
+  .glass-panel {
+    @apply bg-navy-800/50 border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
+  }
+
+  .neon-border-cyan {
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.3), inset 0 0 10px rgba(0, 229, 255, 0.1);
+    border-color: rgba(0, 229, 255, 0.5);
+  }
+
+  .neon-border-violet {
+    box-shadow: 0 0 15px rgba(124, 92, 255, 0.3), inset 0 0 10px rgba(124, 92, 255, 0.1);
+    border-color: rgba(124, 92, 255, 0.5);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   Custom Scrollbar (Webkit)
+   ═══════════════════════════════════════════ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0E27;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #252F5D;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1A224D;
+}
+
+/* ═══════════════════════════════════════════
+   Body Styles
+   ═══════════════════════════════════════════ */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0A0E27;
+  color: #cbd5e1;
+  background-image:
+    radial-gradient(circle at 15% 50%, rgba(124, 92, 255, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 85% 30%, rgba(0, 229, 255, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 50% 100%, rgba(0, 229, 255, 0.05) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* ═══════════════════════════════════════════
+   Background Grid Overlay
+   ═══════════════════════════════════════════ */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%);
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════
+   Base Layer
+   ═══════════════════════════════════════════ */
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Smooth focus ring */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-neon-cyan/50 ring-offset-2 ring-offset-navy-900;
+  }
+}

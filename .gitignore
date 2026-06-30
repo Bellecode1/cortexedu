@@ -1,0 +1,28 @@
+# Dépendances
+node_modules/
+
+# Fichiers de build
+client/dist/
+dist/
+
+# Fichiers de configuration locale
+.env
+.env.local
+*.local
+
+# Logs
+*.log
+server_output.txt
+
+# Uploads locaux (maintenant dans Supabase Storage)
+server/uploads/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
