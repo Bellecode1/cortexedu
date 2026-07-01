@@ -15,16 +15,29 @@ const server = express();
 const port = process.env.PORT || 3000;
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
 
+// Construire la liste des origines CORS autorisées
+// CORS_ORIGINS peut contenir plusieurs URLs séparées par des virgules
+// On normalise les URLs en supprimant les slashs finaux pour éviter des échecs silencieux
+const normalizeOrigin = (url) => url?.replace(/\/+$/, "");
+
+const allowedOrigins = [
+  normalizeOrigin(FRONTEND_URL),
+  ...(process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(",").map(s => normalizeOrigin(s.trim())) : []),
+  ...(process.env.CORS_ORIGIN ? [normalizeOrigin(process.env.CORS_ORIGIN)] : []),
+].filter(Boolean);
+
 // ══════════════════════════════════════════
 // MIDDLEWARES
 // ══════════════════════════════════════════
 
 server.use(cors({
-  origin: [FRONTEND_URL, process.env.CORS_ORIGIN].filter(Boolean),
+  origin: allowedOrigins,
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
   credentials: true,
 }));
+
+console.log(`   Origines CORS: ${allowedOrigins.join(", ")}`);
 
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
