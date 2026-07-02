@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { BrainCircuit, User, Mail, Lock, ArrowRight, Eye, EyeOff, X, CheckCircle2, KeyRound } from 'lucide-react'
 import { toast } from 'sonner'
 import { useDispatch } from 'react-redux'
+import { API_URL } from '@app/api/baseApi'
 import { useLoginMutation, useRegisterMutation, useForgotPasswordMutation, useResetPasswordMutation } from '@app/api'
 import { setCredentials } from '@features/auth'
 
@@ -268,7 +269,7 @@ export const AuthPage = () => {
             password: data.password,
           }).unwrap()
 
-          const profileRes = await fetch('/api/profile', {
+          const profileRes = await fetch(`${API_URL}/profile`, {
             headers: { Authorization: `Bearer ${response.token}` },
           })
 
@@ -283,7 +284,8 @@ export const AuthPage = () => {
           toast.success('Connexion réussie !')
           navigate('/dashboard')
         } catch (error: any) {
-          if (error?.status === 401 || error?.data?.error === 'Invalid credentials') {
+          console.error('Login error:', error)
+          if (error?.status === 401) {
             toast.error('Email ou mot de passe incorrect')
           } else {
             toast.error('Erreur de connexion. Veuillez réessayer.')

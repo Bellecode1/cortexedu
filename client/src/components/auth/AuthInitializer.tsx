@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { API_URL } from '@app/api/baseApi'
 import { setCredentials, logout, selectIsLoading, setLoading } from '@features/auth'
 import { Loader2 } from 'lucide-react'
 
@@ -16,7 +17,7 @@ export const AuthInitializer = ({ children }: { children: React.ReactNode }) => 
 
     const fetchProfile = async () => {
       try {
-        const profileRes = await fetch('/api/profile', {
+        const profileRes = await fetch(`${API_URL}/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

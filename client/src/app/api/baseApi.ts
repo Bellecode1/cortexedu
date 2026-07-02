@@ -3,6 +3,8 @@ import type { RootState } from '../store'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
 
+export { API_URL }
+
 const baseQuery = fetchBaseQuery({
   baseUrl: API_URL,
   prepareHeaders: (headers, { getState }) => {

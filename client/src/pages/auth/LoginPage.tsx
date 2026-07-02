@@ -10,6 +10,7 @@ import { Button } from '@components/ui/Button'
 import { Input } from '@components/ui/Input'
 import { Label } from '@components/ui/Label'
 import { loginSchema, type LoginFormData } from '@lib/validators'
+import { API_URL } from '@app/api/baseApi'
 import { useLoginMutation } from '@app/api'
 import { setCredentials } from '@features/auth'
 
@@ -33,7 +34,7 @@ export const LoginPage = () => {
         password: data.password,
       }).unwrap()
 
-      const profileRes = await fetch('/api/profile', {
+      const profileRes = await fetch(`${API_URL}/profile`, {
         headers: {
           'Authorization': `Bearer ${response.token}`
         }
